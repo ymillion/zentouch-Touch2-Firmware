@@ -2,7 +2,7 @@
 
 ![ZenTouch](images/ZenTouchTouch2-mockup.png)
 
-ZenTouch turns the Synthux Touch 2 (powered by Daisy Seed) into a contemplative nine-tine thumb piano. Eight Karplus-Strong voice slots, a twelve-scale Zen Arc, octave switching, tactile root and interval doubling (perfect fifth or scale-aware third), and an event-based looper that captures each note's full sound with three layers of overdubbing.
+ZenTouch turns the Synthux Touch 2 (powered by Daisy Seed) into a contemplative nine-tine thumb piano. Eight Karplus-Strong voice slots, a twelve-scale Zen Arc, octave switching, tactile root and interval doubling (perfect fifth or scale-aware third), an audio-buffer looper with three overdub layers that leaves the full voice pool free for live play, and a stereo line-in so two ZenTouch units can be chained for duo jams.
 
 ## Interactive Web Manual
 
@@ -40,9 +40,11 @@ Switch A doubles each tine with a perfect fifth or a scale-aware major or minor 
 
 ![Octave switch](images/ZenTouch-OctaveSwitch.png)
 
-### Frozen-snapshot looper
+### Audio-buffer looper that leaves your voice budget alone
 
-P01 records events, not audio. Each captured note stores a frozen snapshot of voice, scale, timbre, linger, octave, and interval mode, so the loop keeps its original sound even when you change those controls live. Up to 256 base events plus three overdub layers of 64 events each. Modifier pads P10 and P11 add stop and resume, remove the last overdub, and hard clear.
+P01 records the audio of your performance directly into SDRAM and plays it back through the live FX bus. The big practical win: **loop notes consume zero voices**, so a busy three-overdub loop never steals a melody note from your live playing — the full 5-voice pool is always available for what you play on top. Change voice, scale, timbre, linger, or the switches afterward and live notes pick up the new settings while the loop keeps its original sound (because the audio IS the recording). Sweep Ambient, Echo, Resonance, or Volume and the loop reacts in real time alongside live notes.
+
+Up to one base layer plus three overdub layers, each up to 60 seconds at 48 kHz, around 23 MB of SDRAM total. Modifier pads P10 and P11 add stop and resume, remove the last overdub, and a held-2-second hard clear.
 
 ### Calibration that solves per-unit pot tolerance
 
@@ -52,7 +54,17 @@ ZenTouch ships with a calibration system that lives in QSPI flash. On first boot
 
 You can download the compiled firmware binary right here in the repository:
 
-* **[Download ZenTouch Firmware V1.1 (.bin)](./ZenTouch-V1.1.bin)** (Latest)
+* **[Download ZenTouch Firmware V2 (.bin)](./ZenTouch-V2.bin)** — **Latest (May 2026)**
+* [Download ZenTouch Firmware V1.1 (.bin)](./ZenTouch-V1.1.bin) — previous release, kept available
+
+### What's new in V2
+
+* **Audio-buffer looper.** The looper now records audio directly into SDRAM instead of recording trigger events. The big practical win: loop notes consume zero voices, so a busy three-overdub loop never steals a melody note from your live performance. The gesture map, LED behaviour, and state machine are identical to V1.1 — only the underlying model and the voice-budget feel changed.
+* **Stereo line-in enabled.** The line-in pins were unused in V1.1; in V2 they are mixed into the master bus after local FX and before the limiter. Cable Unit A's audio out into Unit B's audio in and Unit B's listener hears both performances. One-way only (do not wire B's output back into A's input — that creates a feedback loop the limiter can clamp but not break).
+* **Calibration confirmation gesture.** Each step of the calibration flow now confirms with both switches at CENTER (instead of DOWN), so the device starts normal play in the neutral musical state.
+* **Loop length cap of 60 seconds per layer.** If you keep recording past that, RECORDING auto-closes silently and the loop length is pegged to the buffer. Plenty of headroom for kalimba textures.
+
+V1.1 is kept available so anyone already happy with the event-based looper can keep using it. Loops created in V1.1 do not carry forward (loops are session-scoped in both versions — they reset on power-down regardless).
 
 ## How to Install
 
