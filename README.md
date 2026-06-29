@@ -54,8 +54,18 @@ ZenTouch ships with a calibration system that lives in QSPI flash. On first boot
 
 You can download the compiled firmware binary right here in the repository:
 
-* **[Download ZenTouch Firmware V2 (.bin)](./ZenTouch-V2.bin)** — **Latest (May 2026)**
-* [Download ZenTouch Firmware V1.1 (.bin)](./ZenTouch-V1.1.bin) — previous release, kept available
+* **[Download ZenTouch Firmware V3 (.bin)](https://github.com/ymillion/zentouch-Touch2-Firmware/raw/main/ZenTouch-V3.bin)** — **Latest (June 2026)** · adds optional OLED display
+* [Download ZenTouch Firmware V2 (.bin)](https://github.com/ymillion/zentouch-Touch2-Firmware/raw/main/ZenTouch-V2.bin) — previous release (May 2026)
+* [Download ZenTouch Firmware V1.1 (.bin)](https://github.com/ymillion/zentouch-Touch2-Firmware/raw/main/ZenTouch-V1.1.bin) — previous release, kept available
+
+> These links download the binary directly. Each `.bin` is about **128 KB**. If you ever get a much larger file (≈500 KB), you saved the GitHub web page by mistake — use the link above, or GitHub's **Download raw file** button on the file page.
+
+### What's new in V3
+
+* **Optional OLED display support (SSD1306 128x32).** Add a small monochrome OLED and ZenTouch shows the last parameter you changed — the control's label and its value (for example `SCALE` / `Sakura`, `VOLUME` / `75`, `INTERVAL` / `+5TH`) — for all eight knobs/faders and both switches, so you can see what you are adjusting at a glance. The display shares the touch-sensor I2C bus, so it needs no extra pins, and it is a hardware add-on: units without the display run exactly as V2 did.
+* **Display mod walkthrough.** Wiring and build video: [Synthux Touch 2 Mod — Adding the SSD1306 Display (128x32)](https://youtu.be/oim0qJrMW10).
+
+Everything from V2 (audio-buffer looper, stereo line-in, calibration) is unchanged.
 
 ### What's new in V2
 
